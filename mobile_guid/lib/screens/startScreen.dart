@@ -1,6 +1,7 @@
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_guid/screens/secondScreen.dart';
+import 'package:mobile_guid/widgets/carousel.dart';
 import 'package:mobile_guid/widgets/chipForPlaces.dart';
 
 class StartScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -49,8 +51,7 @@ class _StartScreenState extends State<StartScreen> {
             ),
           ),
           CarouselSlider(
-            options: CarouselOptions(height: 400.0, reverse: false),
-            items: [],
+             
           ),
           Padding(
             padding: const EdgeInsets.all(18.0),

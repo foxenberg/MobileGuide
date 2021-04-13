@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_guid/screens/placesScreen.dart';
 import 'package:mobile_guid/widgets/customClipper.dart';
 
 class SecondScreen extends StatelessWidget {
@@ -13,32 +14,51 @@ class SecondScreen extends StatelessWidget {
       body: Stack(        
           children: <Widget>[
             ClipPath(
+              
               clipper: MyCustomClipper(),
               child: Container(
+                
+                child: InkWell(
+                  onTap: () {
+                    //Navigator.push(context, MaterialPageRoute(builder: (context) => PlacesScreen()));
+                    print("fdsfsd");
+                  }),
                color: Colors.pink,
                 ),
+                
               ),
-              InkWell(
-                onTap: () {},
-                              child: Container(
+              Container(
                   margin: EdgeInsets.all(5),
                   alignment: Alignment.bottomLeft,
                   child: Image.asset("assets/images/routes.png")),
-              ),
               ClipPath(
                 clipper: MyClipper(),
                 child: Container(
                   color: Colors.green,)
                 ),
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context) => PlacesScreen()));
+                  },
                                   child: Container(
                     margin: EdgeInsets.all(5),
                   alignment: Alignment.topRight,
                   child: Image.asset("assets/images/routes.png"),
+                  
                   ),
-                )
-              
+                  
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  padding: EdgeInsets.only(left: 100, bottom: 100),
+                  child: ElevatedButton(
+                    
+                    child: Text("Routes"),
+                    
+                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PlacesScreen()));
+                  },
+                  ),
+                ),
           ],
           
       ),

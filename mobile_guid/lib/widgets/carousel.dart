@@ -20,7 +20,7 @@ class _CarouselSliderState extends State<CarouselSlider> {
       return Container(
         child: FutureBuilder<List<Places>>(
             future: APIServices.fetchPlaces(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<List<Places>> snapshot) {
               if (snapshot.hasError) {
                 return Container(
                   child: Center(
@@ -29,12 +29,16 @@ class _CarouselSliderState extends State<CarouselSlider> {
                 );
               } else if (snapshot.hasData) {
                 return ListView.builder(
-                  itemCount: places.length,
+                  itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Text(places[index].name);
+                    return Text(snapshot.data[index].name);
                   },
                 );
               }
+              else {
+                return Text('fdfsd');
+              }
+              
             }
         ),
       );
