@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_guid/screens/startScreen.dart';
 
+import 'models/constants.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -8,31 +10,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHome(),
-    );
-  }
-}
-
-class MyHome extends StatelessWidget {
-  const MyHome({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.deepPurple[400],
-          title: Text('Выберите город'),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            )
-          ],
-        ),
-        drawer: Drawer(),
-        body: StartScreen(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: kBackgroundColor,
+        primaryColor: kPrimaryColor,
+        textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
+        visualDensity: VisualDensity.adaptivePlatformDensity, 
       ),
+      
+      home: StartScreen(),
     );
   }
 }
+
+
