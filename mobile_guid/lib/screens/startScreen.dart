@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_guid/models/api.services.dart';
 import 'package:mobile_guid/models/constants.dart';
 import 'package:mobile_guid/models/place.dart';
 import 'package:mobile_guid/screens/secondScreen.dart';
 import 'package:mobile_guid/widgets/chipForPlaces.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:http/http.dart' as http;
 
 class StartScreen extends StatefulWidget {
   StartScreen({Key key}) : super(key: key);
@@ -16,6 +14,15 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+
+  Future<Places> _placesModel;
+
+  @override
+  void initState(){
+    _placesModel = APIServices.getPlaces();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,12 +37,18 @@ class _StartScreenState extends State<StartScreen> {
               child: Stack(
                 children: <Widget>[
                   Container(
+                    padding: EdgeInsets.only(left: kDefaultPadding, bottom: 36+kDefaultPadding),
                     height: size.height * 0.2 - 27,
                     decoration: BoxDecoration(
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(36),
-                            bottomRight: Radius.circular(36))),
+                            bottomRight: Radius.circular(36)
+                            )
+                            ),
+                            child: Row(children: <Widget>[
+                              Text('Welcome to MobileGuid', style: Theme.of(context).textTheme.headline5.copyWith(color:Colors.white, fontWeight: FontWeight.bold),)
+                            ],),
                   ),
                   Positioned(
                       bottom: 0,
@@ -86,6 +99,33 @@ class _StartScreenState extends State<StartScreen> {
                     ]).box.margin(EdgeInsets.all(6.0)).make())
                 .box
                 .make(),
+                Container(
+                  child: FutureBuilder<Places>(
+                    future: _placesModel,
+                    builder: (context, snapshot){
+                      
+                      if(snapshot.hasData){
+                        
+                        return ListView.builder(
+                          itemCount: snapshot.data.name.length,
+                          itemBuilder: (context, index){
+                            
+                        return Container(
+                          height: 100,
+                          child: Row(
+                            children: <Widget>[
+                              Text(snapshot.data.name[index])
+                            ],
+                          ),
+                        );
+                      });
+                      }
+                      else
+                        return Center(child: CircularProgressIndicator());
+                      
+                    },
+                  ),
+                ),
             // FutureBuilder(
             //   initialData: [],
             //   builder:
@@ -165,9 +205,8 @@ class _StartScreenState extends State<StartScreen> {
 AppBar buildAppBar() {
   return AppBar(
     elevation: 0,
-    leading: IconButton(
-      icon: SvgPicture.asset(""),
-      onPressed: () {},
-    ),
+    
+      
+    
   );
 }

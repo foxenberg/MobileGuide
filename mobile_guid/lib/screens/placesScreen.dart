@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_guid/models/constants.dart';
 import 'package:mobile_guid/models/localPlace.dart';
 import 'package:mobile_guid/screens/showPlace.dart';
 
@@ -9,56 +10,89 @@ class PlacesScreen extends StatefulWidget {
   _PlacesScreenState createState() => _PlacesScreenState();
 }
 
-
 class _PlacesScreenState extends State<PlacesScreen> {
 
-  List<LocalPlace> items = [];
-  _PlacesScreenState()
-{
-  items.add(new LocalPlace("assets/images/sharif.jpg", "Кол Шариф", "Кремлевская 2", "4.2", "700", "Казань", "Россия"));
-  items.add(new LocalPlace("assets/images/tower.jpg", "Башня Сююмбике", "Кремлевская 3", "4.1", "500", "Казань", "Россия"));
-  items.add(new LocalPlace("assets/images/Kremlin.jpg", "Белый Кремль", "Кремлевская 4", "4.5", "650", "Казань", "Россия"));
-  items.add(new LocalPlace("assets/images/CenterKazan.jpg", "Центр Казан", "Сибгата Хакима 1", "3.4", "1220", "Казань", "Россия"));
-}
+List names = ["Places1", "Places2","Places3", "Places4","Places5", "Places6","Places6","Places6","Places6","Places6"];
 
-Widget customCell(BuildContext context, int index)
-{
-  return GestureDetector(
-      onTap: () {
-      
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ShowPlace(items[index]))
-                );
-      },
-      child: Card(
-      margin: EdgeInsets.all(16),
-        child: Container(
-          padding: EdgeInsets.all(16),
-        child: Row(
-          children: <Widget>[
-            Image.asset(items[index].img, width: 150,),
-            SizedBox(width: 16,),
-            Text(items[index].name),
-          ],
-        ),),
-    ),
-  );
-}
+List names2 = ["DFSDF", "fsdf","fsdfsd", "fdsfsdf","fsdf", "sdfsdf","fsdf", "sdfsdf","fsdf", "sdfsdf"];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(title: Text(
-         "Places"
-       )
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+      ),
+       body: ListView.builder(
+         
+         itemCount: names.length,
+         shrinkWrap: true,
+         itemBuilder: (BuildContext context, int index) => Container(
+           width: MediaQuery.of(context).size.width,
+           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+           child: GestureDetector(
+             onTap: () {
+      
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShowPlace())
+                );
+      },
+                        child: Card(
+               elevation: 5.0,
+               shape: RoundedRectangleBorder(
+                 borderRadius: BorderRadius.circular(0.0),
+
+               ),
+               child: Container(
+                 
+                 width: MediaQuery.of(context).size.width,
+                 padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: <Widget>[
+                     Row(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: <Widget>[
+                         Container(
+                           width: 55.0,
+                           height: 75.0,
+                           color: Colors.green,
+                           child: CircleAvatar(
+                             backgroundColor: Colors.green,
+                             foregroundColor: Colors.green,
+                             backgroundImage: NetworkImage("https://cdn.getyourguide.com/img/location/5ffeb392eb81e.jpeg/92.jpg"),
+                           ),
+                         ),
+                         SizedBox(width: 5.0,),
+                         Column(
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           children: <Widget>[
+                             Text(
+                               names[index], style: TextStyle(color: Colors.black,
+                               fontSize: 18.0, fontWeight: FontWeight.bold),
+                             ),
+                             Text(
+                               names2[index], style: TextStyle(color: Colors.grey),
+                             ),
+                           ],
+                         ),
+
+                       ],
+                     ),
+                     Container(),
+                   ],
+                 ),
+               ),
+             ),
+           ),
+         ),
        ),
-       body: Center(child: 
-       ListView.builder(
-         itemCount: items.length,
-         itemBuilder: (context, index) => customCell(context, index))
-       ,),
     );
   }
 }
+
+
+

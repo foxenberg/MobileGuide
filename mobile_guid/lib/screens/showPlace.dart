@@ -1,51 +1,121 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_guid/models/localPlace.dart';
+import 'package:mobile_guid/models/constants.dart';
 
 class ShowPlace extends StatefulWidget {
-  LocalPlace _localPlace;
-
-  ShowPlace(LocalPlace localPlace) {
-    _localPlace = localPlace;
-  }
+  ShowPlace({Key key}) : super(key: key);
 
   @override
-  _ShowPlaceState createState() => _ShowPlaceState(_localPlace);
+  _ShowPlaceState createState() => _ShowPlaceState();
 }
 
 class _ShowPlaceState extends State<ShowPlace> {
-  LocalPlace localPlace;
-
-  _ShowPlaceState(LocalPlace localPlace) {
-    this.localPlace = localPlace;
-  }
-
   @override
   Widget build(BuildContext context) {
-    
-    return Scaffold(appBar: AppBar(title: Text(localPlace.name),
-    ),
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Hero(
-            transitionOnUserGestures: true,
-            tag: localPlace,
-          child: Transform.scale(scale: 1.0,
-          child: Image.asset(localPlace.img, width:300),
-          ),
-          ),
-          Card(
-            elevation: 8,
-            margin: EdgeInsets.all(16),
-            child: Container(
-              padding: EdgeInsets.all(16),
-              child: Text(localPlace.name),
-            )
-          )
-      ],)
-    ),
+    return Scaffold(
+       backgroundColor: kPrimaryColor,
+       body: Column(
+         children: <Widget>[
+           Expanded(
+             flex: 4,
+             child: Container(
+               width: double.infinity,
+                
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft:  Radius.circular(120.0)),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: 4.0,),
+                      IconButton( icon: new Icon(Icons.arrow_back),
+                      onPressed: (){
+                        Navigator.pop(context);
+                      }, ),
+                      SizedBox(height: 8.0,),
+                      Container(
+                        width: 300,
+                        child: Text('Name place', style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 32.0
+                        ),),
+                      ),
+                      SizedBox( height: 16.0,),
+                      Text(
+                        'Address place', style: TextStyle(color: Colors.black45),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: Text('\₽', style: TextStyle(color: kPrimaryColor, fontSize: 24.0,
+                            fontWeight: FontWeight.bold),),
+                          ),
+                          SizedBox(width: 4.0),
+                          Text(
+                            '700',
+                            style: TextStyle(
+                              color: kPrimaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 52.0
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                            width: 150.0,
+                            child: Image.network('https://fs.tonkosti.ru/0n/nc/0nncvs4yomcggg8kw8og8wc80.jpg', 
+                            fit: BoxFit.cover),
+                          )
+                        ],
+
+
+
+                      )
+                    ],
+                  ),
+                ),
+             ), 
+           ),
+           Expanded(
+             flex: 1,
+             child: 
+           Padding(
+             padding: const EdgeInsets.symmetric(horizontal: 38.0),
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.center,
+               children: <Widget>[
+                 SizedBox(height: 16.0),
+                 Text('Decription', style: TextStyle(color:  Colors.white, )),
+                 Spacer(),
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   children: <Widget>[
+                     Container(
+                       
+                       height: 70.0,
+                       width: 280.0,
+                       decoration: BoxDecoration(
+                         color: darkGreenColor,
+                         borderRadius: BorderRadius.only(
+                           topLeft: Radius.circular(32.0),
+                           topRight: Radius.circular(32.0)
+                         )
+                       ),
+                     )
+                   ],
+                 )
+
+               ],
+             ),
+           ))
+         ],
+       ),
     );
   }
 }
-      

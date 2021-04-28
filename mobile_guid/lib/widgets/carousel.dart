@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_guid/models/api.services.dart';
 import 'package:mobile_guid/models/place.dart';
 
 class CarouselSlider extends StatefulWidget {
@@ -11,15 +10,15 @@ class CarouselSlider extends StatefulWidget {
 
 class _CarouselSliderState extends State<CarouselSlider> {
   List<Places> places;
-  getPlaces() {
-    APIServices.fetchPlaces().then((response) {});
-  }
+  // getPlaces() {
+  //   APIServices.fetchPlaces().then((response) {});
+  // }
 
     @override
     Widget build(BuildContext context) {
       return Container(
         child: FutureBuilder<List<Places>>(
-            future: APIServices.fetchPlaces(),
+            //future: APIServices.fetchPlaces(),
             builder: (BuildContext context, AsyncSnapshot<List<Places>> snapshot) {
               if (snapshot.hasError) {
                 return Container(
