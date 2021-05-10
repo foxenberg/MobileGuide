@@ -1,5 +1,5 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_guid/models/api.services.dart';
 import 'package:mobile_guid/models/constants.dart';
 import 'package:mobile_guid/models/place.dart';
 import 'package:mobile_guid/screens/secondScreen.dart';
@@ -14,13 +14,43 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+  _StartScreenState() {
+    _getPlaces3();
+  }
 
-  Future<Places> _placesModel;
+  
+  List<Places> _listPlaces = [];
+  // getPlaces2() async{
+  //    setState(() async{
+  //     _listPlaces = await getPlaces();
 
-  @override
-  void initState(){
-    _placesModel = APIServices.getPlaces();
-    super.initState();
+  //   });
+  // }
+
+  static Future<List<Places>>getPlaces() async {
+
+
+    // var options = BaseOptions(
+    //   baseUrl: "http://185.246.67.169:5002/api/places",
+    // );
+    // var dio = Dio(options);
+    var _str = await Dio().get("http://185.246.67.169:5002/api/places").then((value) => placesFromJson(value.data));
+    print(_str);
+    return _str;
+    
+  }
+
+  _getPlaces3() async {
+
+    var hh = getPlaces();
+    
+      
+      setState(() async{
+        _listPlaces = await getPlaces();
+            
+      });
+      //print(productsData.length);
+    
   }
 
   @override
@@ -37,18 +67,23 @@ class _StartScreenState extends State<StartScreen> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(left: kDefaultPadding, bottom: 36+kDefaultPadding),
+                    padding: EdgeInsets.only(
+                        left: kDefaultPadding, bottom: 36 + kDefaultPadding),
                     height: size.height * 0.2 - 27,
                     decoration: BoxDecoration(
                         color: kPrimaryColor,
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(36),
-                            bottomRight: Radius.circular(36)
-                            )
-                            ),
-                            child: Row(children: <Widget>[
-                              Text('Welcome to MobileGuid', style: Theme.of(context).textTheme.headline5.copyWith(color:Colors.white, fontWeight: FontWeight.bold),)
-                            ],),
+                            bottomRight: Radius.circular(36))),
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Welcome to MobileGuid',
+                          style: Theme.of(context).textTheme.headline5.copyWith(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
                   ),
                   Positioned(
                       bottom: 0,
@@ -99,75 +134,22 @@ class _StartScreenState extends State<StartScreen> {
                     ]).box.margin(EdgeInsets.all(6.0)).make())
                 .box
                 .make(),
-                Container(
-                  child: FutureBuilder<Places>(
-                    future: _placesModel,
-                    builder: (context, snapshot){
-                      
-                      if(snapshot.hasData){
-                        
-                        return ListView.builder(
-                          itemCount: snapshot.data.name.length,
-                          itemBuilder: (context, index){
-                            
-                        return Container(
-                          height: 100,
-                          child: Row(
-                            children: <Widget>[
-                              Text(snapshot.data.name[index])
-                            ],
-                          ),
-                        );
-                      });
-                      }
-                      else
-                        return Center(child: CircularProgressIndicator());
-                      
-                    },
-                  ),
-                ),
-            // FutureBuilder(
-            //   initialData: [],
-            //   builder:
-            //       (BuildContext context, AsyncSnapshot<List<Places>> snapshot) {
-            //     if (snapshot.hasData) {
-            //       return VxSwiper(
-            //         items: snapshot.data
-            //             .map((place) => VStack([
-            //                   place.name.text.white.make(),
-            //                 ])
-            //                     .cornerRadius(30)
-            //                     .box
-            //                     .rounded
-            //                     .alignCenter
-            //                     .color(Vx.randomOpaqueColor)
-            //                     .make()
-            //                     .p4())
-            //             .toList(),
-            //       );
-            //     } else if (snapshot.connectionState == ConnectionState.active) {
-            //       return VxAnimator<double>(
-            //           duration: Duration(seconds: 1, milliseconds: 500),
-            //           tween: Tween<double>(begin: 30, end: 80),
-            //           cycles: 0,
-            //           builder: (context, animatorState, child) => Center(
-            //               child: Icon(Icons.card_travel_outlined)
-            //                   .iconColor(Colors.indigoAccent)
-            //                   .iconSize(animatorState.value)
-            //                   .card
-            //                   .elevation(8)
-            //                   .circular
-            //                   .white
-            //                   .make()
-            //                   .box
-            //                   .size(context.percentWidth * animatorState.value,
-            //                       context.percentWidth * animatorState.value)
-            //                   .make())).make();
-            //     } else
-            //       return "fuck go back".text.make();
-            //   },
-            //   future: APIServices.fetchPlaces(),
-            // ),
+            Container(
+                child: Container(
+                  height: 100,
+                  width: 100,
+              child: ListView.builder(
+                
+                  itemCount: _listPlaces.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: 100,
+                      child: Row(
+                        children: <Widget>[Text(_listPlaces[index].name)],
+                      ),
+                    );
+                  }),
+            )),
             'Kazan, Russia'
                 .text
                 .textStyle(
@@ -205,8 +187,5 @@ class _StartScreenState extends State<StartScreen> {
 AppBar buildAppBar() {
   return AppBar(
     elevation: 0,
-    
-      
-    
   );
 }

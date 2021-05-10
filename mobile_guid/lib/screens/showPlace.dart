@@ -69,7 +69,7 @@ class _ShowPlaceState extends State<ShowPlace> {
                         children: <Widget>[
                           Container(
                             width: 150.0,
-                            child: Image.network('https://fs.tonkosti.ru/0n/nc/0nncvs4yomcggg8kw8og8wc80.jpg', 
+                            child: Image.network('https://topgid.net/uploads/posts/2019-09/1568213750_parizh-francija.jpg', 
                             fit: BoxFit.cover),
                           )
                         ],

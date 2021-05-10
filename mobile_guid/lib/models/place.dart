@@ -17,6 +17,8 @@ class Places {
         this.city,
     });
 
+   
+
     Id id;
     String name;
     String address;
