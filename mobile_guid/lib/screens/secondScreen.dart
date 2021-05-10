@@ -6,7 +6,7 @@ import 'package:mobile_guid/screens/routes_screen.dart';
 import 'package:mobile_guid/widgets/customClipper.dart';
 
 class SecondScreen extends StatelessWidget {
-  const SecondScreen({Key key}) : super(key: key);
+  const SecondScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

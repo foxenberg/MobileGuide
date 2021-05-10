@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RoutesScreen extends StatefulWidget {
-  const RoutesScreen({Key key}) : super(key: key);
+  const RoutesScreen({Key? key}) : super(key: key);
 
   @override
   _RoutesScreenState createState() => _RoutesScreenState();

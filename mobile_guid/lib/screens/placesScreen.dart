@@ -4,7 +4,7 @@ import 'package:mobile_guid/models/localPlace.dart';
 import 'package:mobile_guid/screens/showPlace.dart';
 
 class PlacesScreen extends StatefulWidget {
-  PlacesScreen({Key key}) : super(key: key);
+  PlacesScreen({Key? key}) : super(key: key);
 
   @override
   _PlacesScreenState createState() => _PlacesScreenState();

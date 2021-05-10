@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_guid/models/constants.dart';
 
 class ShowPlace extends StatefulWidget {
-  ShowPlace({Key key}) : super(key: key);
+  ShowPlace({Key? key}) : super(key: key);
 
   @override
   _ShowPlaceState createState() => _ShowPlaceState();

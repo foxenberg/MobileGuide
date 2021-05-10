@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:mobile_guid/models/place.dart';
 import 'package:http/http.dart' as http;
 
+import 'place.dart';
 
-
-class APIServices{
-
+class APIServices {
   // static var placesUrl= 'http://185.246.67.169:5002/api/places';
   // static Uri url = Uri.parse(placesUrl);
 
@@ -15,30 +14,22 @@ class APIServices{
   // }
   static String placesUrl = 'http://185.246.67.169:5002/api/places';
   static Uri placesUri = Uri.parse(placesUrl);
-  
-  static Future<Places>  getPlaces() async{
+
+  static Future<Place?> getPlaces() async {
     var client = http.Client();
-    var placesModel = null;
+    ;
 
-  try{
-
-  
-    var response = await client.get(placesUri);
-    if(response.statusCode == 200)
-    {
-      var jsonString = response.body;
-      var jsonMap = json.decode(jsonString);
-      placesModel = Places.fromJson(jsonMap);
+    try {
+      var response = await client.get(placesUri);
+      if (response.statusCode == 200) {
+        var jsonString = response.body;
+        var jsonMap = json.decode(jsonString);
+        //placesModel = Places.fromJson(jsonMap);
+      }
+    } catch (Exception) {
+      //return placesModel;
     }
-  }
-  catch(Exception)
-  {
-    return placesModel;
-  }
 
-    return placesModel;
+    //return placesModel;
   }
-
-  
-
-  }
+}

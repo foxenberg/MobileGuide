@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_guid/models/constants.dart';
@@ -6,20 +8,22 @@ import 'package:mobile_guid/screens/secondScreen.dart';
 import 'package:mobile_guid/widgets/chipForPlaces.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../models/place.dart';
+import '../models/place.dart';
+
 class StartScreen extends StatefulWidget {
-  StartScreen({Key key}) : super(key: key);
+  StartScreen({Key? key}) : super(key: key);
 
   @override
   _StartScreenState createState() => _StartScreenState();
 }
 
 class _StartScreenState extends State<StartScreen> {
+  List<Place> _listPlaces = List.empty();
   _StartScreenState() {
     _getPlaces3();
   }
 
-  
-  List<Places> _listPlaces = [];
   // getPlaces2() async{
   //    setState(() async{
   //     _listPlaces = await getPlaces();
@@ -27,30 +31,20 @@ class _StartScreenState extends State<StartScreen> {
   //   });
   // }
 
-  static Future<List<Places>>getPlaces() async {
-
-
-    // var options = BaseOptions(
-    //   baseUrl: "http://185.246.67.169:5002/api/places",
-    // );
-    // var dio = Dio(options);
-    var _str = await Dio().get("http://185.246.67.169:5002/api/places").then((value) => placesFromJson(value.data));
-    print(_str);
-    return _str;
-    
+  static Future<Response<String>> getPlaces() async {
+    return await Dio().get<String>("http://185.246.67.169:5002/api/places");
   }
 
   _getPlaces3() async {
+    var places = await getPlaces().then((value) =>
+        (jsonDecode(value.data!) as List)
+            .map((e) => Place.fromMap(e))
+            .toList());
+    print(places);
 
-    var hh = getPlaces();
-    
-      
-      setState(() async{
-        _listPlaces = await getPlaces();
-            
-      });
-      //print(productsData.length);
-    
+    setState(() {
+      _listPlaces = places;
+    });
   }
 
   @override
@@ -79,8 +73,12 @@ class _StartScreenState extends State<StartScreen> {
                       children: <Widget>[
                         Text(
                           'Welcome to MobileGuid',
-                          style: Theme.of(context).textTheme.headline5.copyWith(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
                         )
                       ],
                     ),
@@ -136,10 +134,9 @@ class _StartScreenState extends State<StartScreen> {
                 .make(),
             Container(
                 child: Container(
-                  height: 100,
-                  width: 100,
+              height: 100,
+              width: 100,
               child: ListView.builder(
-                
                   itemCount: _listPlaces.length,
                   itemBuilder: (context, index) {
                     return Container(
