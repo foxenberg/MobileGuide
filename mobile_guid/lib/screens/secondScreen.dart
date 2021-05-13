@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_guid/screens/placesScreen.dart';
 import 'package:mobile_guid/screens/routes_screen.dart';
@@ -27,13 +25,14 @@ class SecondScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      
                       margin: EdgeInsets.only(left: 10, right: 180, bottom: 10),
                       alignment: Alignment.bottomLeft,
                       child: Image.asset("assets/images/routes.png"),
                     ),
-                    Text('Маршруты', 
-                    style: TextStyle(fontSize: 22.0),),
+                    Text(
+                      'Маршруты',
+                      style: TextStyle(fontSize: 22.0),
+                    ),
                   ],
                 ),
               ),
@@ -50,14 +49,15 @@ class SecondScreen extends StatelessWidget {
                   color: Colors.green,
                   child: Column(
                     children: [
-                     
                       Container(
                         margin: EdgeInsets.only(left: 100, right: 10, top: 10),
                         alignment: Alignment.topRight,
                         child: Image.asset("assets/images/placesTwo.png"),
                       ),
-                       Text('Места'
-                       , style:TextStyle(fontSize: 22.0),)
+                      Text(
+                        'Места',
+                        style: TextStyle(fontSize: 22.0),
+                      )
                     ],
                   )),
             ),

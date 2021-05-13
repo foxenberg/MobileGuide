@@ -9,7 +9,6 @@ import 'package:mobile_guid/widgets/chipForPlaces.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../models/place.dart';
-import '../models/place.dart';
 
 class StartScreen extends StatefulWidget {
   StartScreen({Key? key}) : super(key: key);
@@ -137,13 +136,30 @@ class _StartScreenState extends State<StartScreen> {
               height: 100,
               width: 100,
               child: ListView.builder(
+                scrollDirection: Axis.horizontal,
                   itemCount: _listPlaces.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder:  (BuildContext context, int index){
+                    Place place = _listPlaces[index];
                     return Container(
-                      height: 100,
-                      child: Row(
-                        children: <Widget>[Text(_listPlaces[index].name)],
-                      ),
+                      margin: EdgeInsets.all(10.0),
+                      width: 210.0,
+                      child: Stack(children: <Widget>[
+                        Container(
+                          width: 200.0,
+                          height: 120.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0)
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              Text('${place.city.length} город')
+                            ],
+                          ),
+
+
+                        )
+                      ],)
+    
                     );
                   }),
             )),
