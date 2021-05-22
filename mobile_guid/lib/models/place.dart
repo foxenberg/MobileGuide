@@ -66,7 +66,7 @@ class Place {
       name: map['name'],
       address: map['address'],
       reviews: map['reviews'],
-      photo: map['photo'],
+      photo: map ['photo'],
       rating: map['rating'],
       avgCost: map['avgCost'],
       country: map['country'],

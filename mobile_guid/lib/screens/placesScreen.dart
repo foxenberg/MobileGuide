@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_guid/models/constants.dart';
 import 'package:mobile_guid/models/localPlace.dart';
+import 'package:mobile_guid/models/place.dart';
 import 'package:mobile_guid/screens/showPlace.dart';
 
 class PlacesScreen extends StatefulWidget {
@@ -11,31 +15,28 @@ class PlacesScreen extends StatefulWidget {
 }
 
 class _PlacesScreenState extends State<PlacesScreen> {
-  List names = [
-    "Places1",
-    "Places2",
-    "Places3",
-    "Places4",
-    "Places5",
-    "Places6",
-    "Places6",
-    "Places6",
-    "Places6",
-    "Places6"
-  ];
+  List<Place> _listPlaces = List.empty();
+  _PlacesScreenState() {
+    _getPlaces3();
+  }
 
-  List names2 = [
-    "DFSDF",
-    "fsdf",
-    "fsdfsd",
-    "fdsfsdf",
-    "fsdf",
-    "sdfsdf",
-    "fsdf",
-    "sdfsdf",
-    "fsdf",
-    "sdfsdf"
-  ];
+  static Future<Response<String>> getPlaces() async {
+    return await Dio().get<String>("http://185.246.67.169:5002/api/places");
+  }
+
+  _getPlaces3() async {
+    var places = await getPlaces().then((value) =>
+        (jsonDecode(value.data!) as List)
+            .map((e) => Place.fromMap(e))
+            .toList());
+    print(places);
+
+    setState(() {
+      _listPlaces = places;
+    });
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
         backgroundColor: kPrimaryColor,
       ),
       body: ListView.builder(
-        itemCount: names.length,
+        itemCount: _listPlaces.length,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) => Container(
           width: MediaQuery.of(context).size.width,
@@ -52,7 +53,18 @@ class _PlacesScreenState extends State<PlacesScreen> {
           child: GestureDetector(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ShowPlace()));
+                  MaterialPageRoute(builder: (context) => new ShowPlace(value: 
+                  Place(
+                    id: _listPlaces[index].id,
+                    name: _listPlaces[index].name, 
+                    address: _listPlaces[index].address,
+                    city: _listPlaces[index].address,
+                    country: _listPlaces[index].country,
+                    avgCost: _listPlaces[index].avgCost,
+                    rating: _listPlaces[index].rating,
+                    reviews: _listPlaces[index].reviews,
+                    photo: _listPlaces[index].reviews
+                    ))));
             },
             child: Card(
               elevation: 5.0,
@@ -87,14 +99,14 @@ class _PlacesScreenState extends State<PlacesScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              names[index],
+                              _listPlaces[index].name,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              names2[index],
+                              _listPlaces[index].address,
                               style: TextStyle(color: Colors.grey),
                             ),
                           ],

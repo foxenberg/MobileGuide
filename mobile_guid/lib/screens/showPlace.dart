@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_guid/models/constants.dart';
+import 'package:mobile_guid/models/place.dart';
 
 class ShowPlace extends StatefulWidget {
-  ShowPlace({Key? key}) : super(key: key);
+  final Place value;
+  ShowPlace({Key? key, required this.value}) : super(key: key);
 
   @override
   _ShowPlaceState createState() => _ShowPlaceState();
@@ -37,13 +39,13 @@ class _ShowPlaceState extends State<ShowPlace> {
                       SizedBox(height: 8.0,),
                       Container(
                         width: 300,
-                        child: Text('Name place', style: TextStyle(
+                        child: Text(widget.value.name, style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 32.0
                         ),),
                       ),
                       SizedBox( height: 16.0,),
                       Text(
-                        'Address place', style: TextStyle(color: Colors.black45),
+                        widget.value.address, style: TextStyle(color: Colors.black45),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -55,7 +57,7 @@ class _ShowPlaceState extends State<ShowPlace> {
                           ),
                           SizedBox(width: 4.0),
                           Text(
-                            '700',
+                            widget.value.avgCost,
                             style: TextStyle(
                               color: kPrimaryColor,
                               fontWeight: FontWeight.bold,
