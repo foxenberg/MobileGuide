@@ -36,8 +36,6 @@ class _PlacesScreenState extends State<PlacesScreen> {
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,26 +48,28 @@ class _PlacesScreenState extends State<PlacesScreen> {
         itemBuilder: (BuildContext context, int index) => Container(
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+          
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => new ShowPlace(value: 
-                  Place(
-                    id: _listPlaces[index].id,
-                    name: _listPlaces[index].name, 
-                    address: _listPlaces[index].address,
-                    city: _listPlaces[index].address,
-                    country: _listPlaces[index].country,
-                    avgCost: _listPlaces[index].avgCost,
-                    rating: _listPlaces[index].rating,
-                    reviews: _listPlaces[index].reviews,
-                    photo: _listPlaces[index].reviews
-                    ))));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => new ShowPlace(
+                          value: Place(
+                              id: _listPlaces[index].id,
+                              name: _listPlaces[index].name,
+                              address: _listPlaces[index].address,
+                              city: _listPlaces[index].address,
+                              country: _listPlaces[index].country,
+                              avgCost: _listPlaces[index].avgCost,
+                              rating: _listPlaces[index].rating,
+                              reviews: _listPlaces[index].reviews,
+                              photo: _listPlaces[index].photo))));
             },
             child: Card(
               elevation: 5.0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0),
+                borderRadius: BorderRadius.circular(20.0),
               ),
               child: Container(
                 width: MediaQuery.of(context).size.width,
@@ -84,22 +84,23 @@ class _PlacesScreenState extends State<PlacesScreen> {
                         Container(
                           width: 55.0,
                           height: 75.0,
-                          color: Colors.green,
                           child: CircleAvatar(
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.green,
-                            backgroundImage: NetworkImage(
-                                "https://cdn.getyourguide.com/img/location/5ffeb392eb81e.jpeg/92.jpg"),
+                            backgroundImage:
+                                NetworkImage(_listPlaces[index].photo),
                           ),
                         ),
                         SizedBox(
-                          width: 5.0,
+                          width: 10.0,
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
+                              
                               _listPlaces[index].name,
+
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18.0,

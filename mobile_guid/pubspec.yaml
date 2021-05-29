@@ -25,9 +25,13 @@ dependencies:
     sdk: flutter
   http: ^0.13.1
   carousel_slider: ^3.0.0
-  shimmer: ^1.1.2
+  shimmer: ^2.0.0
   velocity_x:
   dio: ^4.0.0
+  flutter_polyline_points: ^1.0.0
+  map: ^0.9.0+2
+  latlng: ^0.1.0
+  cached_network_image: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
