@@ -17,7 +17,6 @@ class APIServices {
 
   static Future<Place?> getPlaces() async {
     var client = http.Client();
-    ;
 
     try {
       var response = await client.get(placesUri);

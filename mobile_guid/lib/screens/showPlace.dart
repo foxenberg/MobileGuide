@@ -65,9 +65,9 @@ class _ShowPlaceState extends State<ShowPlace> {
                       ),
                       Positioned(
                           child: Image.network(
-                            widget.value.photo,
-                            height: 210.0,
-                          )),
+                        widget.value.photo,
+                        height: 210.0,
+                      )),
                     ],
                   ),
                 )

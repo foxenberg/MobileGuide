@@ -83,7 +83,7 @@ class _PlacesScreenState extends State<PlacesScreen> {
                       children: <Widget>[
                         Container(
                           width: 55.0,
-                          height: 75.0,
+                          height: 85.0,
                           child: CircleAvatar(
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.green,
