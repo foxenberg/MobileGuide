@@ -9,7 +9,7 @@ class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      
       body: Stack(
         children: <Widget>[
           ClipPath(
@@ -20,7 +20,7 @@ class SecondScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => RoutesScreen()));
               },
               child: Container(
-                color: Colors.lightGreen,
+                color: Colors.green.shade500,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -29,9 +29,12 @@ class SecondScreen extends StatelessWidget {
                       alignment: Alignment.bottomLeft,
                       child: Image.asset("assets/images/routes.png"),
                     ),
-                    Text(
-                      'Маршруты',
-                      style: TextStyle(fontSize: 22.0),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 40.0),
+                      child: Text(
+                        'Маршруты',
+                        style: TextStyle(fontSize: 26.0, color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
@@ -46,7 +49,7 @@ class SecondScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => PlacesScreen()));
               },
               child: Container(
-                  color: Colors.green,
+                  color: Colors.green.shade400,
                   child: Column(
                     children: [
                       Container(
@@ -56,7 +59,7 @@ class SecondScreen extends StatelessWidget {
                       ),
                       Text(
                         'Места',
-                        style: TextStyle(fontSize: 22.0),
+                        style: TextStyle(fontSize: 26.0, color: Colors.black, fontWeight: FontWeight.bold),
                       )
                     ],
                   )),

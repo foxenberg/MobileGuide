@@ -66,6 +66,7 @@ class _TestMapState extends State<TestMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: MapLayoutBuilder(
         controller: controller,
         builder: (context, transformer) {

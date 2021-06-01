@@ -26,7 +26,7 @@ class _ShowPlaceState extends State<ShowPlace> {
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.only(left: 30.0, right: 30.0, top: 60.0),
-                  height: 520.0,
+                  height: 320.0,
                   color: kPrimaryColor,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,25 +56,35 @@ class _ShowPlaceState extends State<ShowPlace> {
                         style: TextStyle(color: Colors.white, fontSize: 15.0),
                       ),
                       SizedBox(height: 5.0),
-                      Text(
-                        widget.value.address,
-                        style: TextStyle(color: Colors.white, fontSize: 24.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          
+                          Text(
+                            widget.value.address,
+                            style: TextStyle(color: Colors.white, fontSize: 24.0),
+                          ),
+                          GestureDetector(
+                            onTap: (){
+                               Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => new TestMap()));
+                            },
+                            child: 
+                            Icon(Icons.location_on_sharp, size: 40.0,))
+                        ],
                       ),
                       SizedBox(
                         height: 40.0,
                       ),
-                      Positioned(
-                          child: Image.network(
-                        widget.value.photo,
-                        height: 210.0,
-                      )),
                     ],
                   ),
                 )
               ],
             ),
             Container(
-              height: 400.0,
+              height: 650.0,
               transform: Matrix4.translationValues(0.0, -20.0, 0.0),
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -88,6 +98,13 @@ class _ShowPlaceState extends State<ShowPlace> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        Positioned(
+                          
+                            child: Image.network(
+                          widget.value.photo,
+                          height: 210.0,
+                        )),
+                        SizedBox(height: 30.0,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -119,18 +136,7 @@ class _ShowPlaceState extends State<ShowPlace> {
                           style:
                               TextStyle(color: Colors.black87, fontSize: 16.0),
                         ),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: kPrimaryColor, // background
-                              onPrimary: Colors.white, // foreground
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => new TestMap()));
-                            },
-                            child: Text('Открыть на карте'))
+                       
                       ],
                     ),
                   )
