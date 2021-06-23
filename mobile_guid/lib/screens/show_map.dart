@@ -2,23 +2,33 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:latlng/latlng.dart';
 import 'package:map/map.dart';
+import 'package:mobile_guid/models/place.dart';
 
 class TestMap extends StatefulWidget {
-  TestMap({Key? key}) : super(key: key);
+  final Place value;
+  TestMap({Key? key, required this.value}) : super(key: key);
 
   @override
   _TestMapState createState() => _TestMapState();
 }
 
 class _TestMapState extends State<TestMap> {
-  final controller = MapController(
-    location: LatLng(55.79532901481151, 49.11539336519824),
-  );
+  var latitudeContext;
+  var longitudeContext;
+  var controller;
 
-  
-  
+  @override
+  initState() {
+    super.initState();
+    latitudeContext = widget.value.latitude;
+    longitudeContext = widget.value.longitude;
+    controller = MapController(
+      location: LatLng(latitudeContext, longitudeContext),
+    );
+  }
+
   void _gotoDefault() {
-    controller.center = LatLng(55.79532901481151, 49.11539336519824);
+    controller.center = LatLng(widget.value.latitude, widget.value.longitude);
     setState(() {});
   }
 
@@ -66,14 +76,14 @@ class _TestMapState extends State<TestMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(widget.value.name),
+      ),
       body: MapLayoutBuilder(
         controller: controller,
         builder: (context, transformer) {
-        
-
-          final homeLocation =
-              transformer.fromLatLngToXYCoords(LatLng(55.79532901481151, 49.11539336519824));
+          final homeLocation = transformer.fromLatLngToXYCoords(
+              LatLng(widget.value.latitude, widget.value.longitude));
 
           final homeMarkerWidget =
               _buildMarkerWidget(homeLocation, Colors.black);
@@ -121,7 +131,6 @@ class _TestMapState extends State<TestMap> {
                   },
                 ),
                 homeMarkerWidget,
-                
                 centerMarkerWidget,
               ],
             ),

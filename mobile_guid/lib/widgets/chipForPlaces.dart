@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_guid/models/constants.dart';
 
 Widget chipForPlace(String label, Color color){
     return ActionChip(labelPadding: EdgeInsets.all(8.0),

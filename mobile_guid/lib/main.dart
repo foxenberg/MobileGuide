@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_guid/screens/startScreen.dart';
+import 'package:mobile_guid/screens/filter_city_screen.dart';
 
 import 'models/constants.dart';
 
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: StartScreen(),
+      home: FilterCityScreen(),
     );
   }
 }

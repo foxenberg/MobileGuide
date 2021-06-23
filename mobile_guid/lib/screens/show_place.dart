@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile_guid/models/constants.dart';
 import 'package:mobile_guid/models/place.dart';
-import 'package:mobile_guid/screens/test_map.dart';
+import 'package:mobile_guid/screens/show_map.dart';
 
 class ShowPlace extends StatefulWidget {
   final Place value;
@@ -13,6 +14,27 @@ class ShowPlace extends StatefulWidget {
 }
 
 class _ShowPlaceState extends State<ShowPlace> {
+  late GoogleMapController mapController;
+
+  final LatLng _center = LatLng(55.795240392452406, 49.11529739063372);
+
+  Future<void> _onMapCreated(GoogleMapController controller) async {
+    mapController = controller;
+  }
+
+  void showMap() {
+    showDialog(
+      context: context,
+      builder: (context) => GoogleMap(
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: _center,
+          zoom: 11.0,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,20 +81,36 @@ class _ShowPlaceState extends State<ShowPlace> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          
                           Text(
                             widget.value.address,
-                            style: TextStyle(color: Colors.white, fontSize: 24.0),
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 24.0),
                           ),
                           GestureDetector(
-                            onTap: (){
-                               Navigator.push(
+                              onTap: () {
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => new TestMap()));
-                            },
-                            child: 
-                            Icon(Icons.location_on_sharp, size: 40.0,))
+                                    builder: (context) => new TestMap(
+                                        value: Place(
+                                            id: widget.value.id,
+                                            name: widget.value.name,
+                                            address: widget.value.address,
+                                            city: widget.value.address,
+                                            country: widget.value.country,
+                                            avgCost: widget.value.avgCost,
+                                            rating: widget.value.rating,
+                                            reviews: widget.value.reviews,
+                                            photo: widget.value.photo,
+                                            latitude: widget.value.latitude,
+                                            longitude: widget.value.longitude)),
+                                  ),
+                                );
+                              },
+                              child: Icon(
+                                Icons.location_on_sharp,
+                                size: 40.0,
+                              ))
                         ],
                       ),
                       SizedBox(
@@ -84,7 +122,7 @@ class _ShowPlaceState extends State<ShowPlace> {
               ],
             ),
             Container(
-              height: 650.0,
+              height: 750.0,
               transform: Matrix4.translationValues(0.0, -20.0, 0.0),
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -94,17 +132,20 @@ class _ShowPlaceState extends State<ShowPlace> {
                 children: <Widget>[
                   Padding(
                     padding:
-                        EdgeInsets.only(left: 30.0, right: 30.0, top: 40.0),
+                        EdgeInsets.only(left: 15.0, right: 15.0, top: 40.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Positioned(
-                          
-                            child: Image.network(
-                          widget.value.photo,
-                          height: 210.0,
+                            child: Container(
+                          child: Image.network(
+                            widget.value.photo,
+                            width: double.maxFinite,
+                          ),
                         )),
-                        SizedBox(height: 30.0,),
+                        SizedBox(
+                          height: 30.0,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -136,7 +177,6 @@ class _ShowPlaceState extends State<ShowPlace> {
                           style:
                               TextStyle(color: Colors.black87, fontSize: 16.0),
                         ),
-                       
                       ],
                     ),
                   )

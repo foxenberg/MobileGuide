@@ -1,9 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mobile_guid">
    <application
-        android:label="mobile_guid"
+        android:label="Mobile Guide"
         android:usesCleartextTraffic="true"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/route_logo">
+
+            <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyC3kr85bV3TUcDunjhsw3x_npa7q3oYbeA"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

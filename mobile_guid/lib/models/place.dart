@@ -6,21 +6,24 @@ class Place {
   final String address;
   final String reviews;
   final String photo;
-  final String rating;
+  final double rating;
   final String avgCost;
   final String country;
   final String city;
-  Place({
-    required this.id,
-    required this.name,
-    required this.address,
-    required this.reviews,
-    required this.photo,
-    required this.rating,
-    required this.avgCost,
-    required this.country,
-    required this.city,
-  });
+  double latitude;
+  double longitude;
+  Place(
+      {required this.id,
+      required this.name,
+      required this.address,
+      required this.reviews,
+      required this.photo,
+      required this.rating,
+      required this.avgCost,
+      required this.country,
+      required this.city,
+      required this.latitude,
+      required this.longitude});
 
   Place copyWith({
     String? id,
@@ -28,10 +31,12 @@ class Place {
     String? address,
     String? reviews,
     String? photo,
-    String? rating,
+    double? rating,
     String? avgCost,
     String? country,
     String? city,
+    double? latitude,
+    double? longitude,
   }) {
     return Place(
       id: id ?? this.id,
@@ -43,6 +48,8 @@ class Place {
       avgCost: avgCost ?? this.avgCost,
       country: country ?? this.country,
       city: city ?? this.city,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude
     );
   }
 
@@ -57,6 +64,8 @@ class Place {
       'avgCost': avgCost,
       'country': country,
       'city': city,
+      'latitude' : latitude,
+      'longitude': longitude
     };
   }
 
@@ -66,11 +75,14 @@ class Place {
       name: map['name'],
       address: map['address'],
       reviews: map['reviews'],
-      photo: map ['photo'],
-      rating: map['rating'],
+      photo: map['photo'],
+      rating: map['rating'].toDouble(),
       avgCost: map['avgCost'],
       country: map['country'],
       city: map['city'],
+      latitude: map['latitude'],
+      longitude: map['longitude'],
+      
     );
   }
 
@@ -80,7 +92,7 @@ class Place {
 
   @override
   String toString() {
-    return 'Place(id: $id, name: $name, address: $address, reviews: $reviews, photo: $photo, rating: $rating, avgCost: $avgCost, country: $country, city: $city)';
+    return 'Place(id: $id, name: $name, address: $address, reviews: $reviews, photo: $photo, rating: $rating, avgCost: $avgCost, country: $country, city: $city, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -96,7 +108,9 @@ class Place {
         other.rating == rating &&
         other.avgCost == avgCost &&
         other.country == country &&
-        other.city == city;
+        other.city == city &&
+        other.latitude == latitude &&
+        other.longitude == longitude;
   }
 
   @override
@@ -109,6 +123,8 @@ class Place {
         rating.hashCode ^
         avgCost.hashCode ^
         country.hashCode ^
-        city.hashCode;
+        city.hashCode ^
+        latitude.hashCode ^
+        longitude.hashCode;
   }
 }

@@ -7,7 +7,7 @@ class MyCustomClipper extends CustomClipper<Path>{
     path.lineTo(0, size.height);
     path.lineTo(size.width, size.height);
     
-
+    
     path.close();
     return path;
   }
@@ -24,6 +24,7 @@ class MyClipper extends CustomClipper<Path>{
     var path = Path();
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
+    
     
 
     path.close();
