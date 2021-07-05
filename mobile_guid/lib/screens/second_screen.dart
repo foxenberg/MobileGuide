@@ -35,10 +35,10 @@ class SecondScreen extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(bottom: 40.0),
                       child: Text(
-                        'Маршруты',
+                        'Дороги',
                         style: TextStyle(
                             fontSize: 26.0,
-                            color: Colors.black,
+                            color: Colors.deepPurple,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
